@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #es1 {
+            border: 1px solid white;
+            background-color: white;
+            margin: 5px;
+            padding: 10px;
+            position: relative; 
+        }
+
+        #c1 {
+            background-color: #252222;
+            border: none;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+
+        .image-container {
+            position: absolute;
+            bottom: 20px; 
+            right: 20px;   
+            display: none;  
+            text-align: center;
+            width: 500px;     
+        }
+
+        .image-container img {
+            width: 100%;  
+            height: auto; 
+            margin-bottom: 10px; 
+        }
+
+    </style>
+</head>
+<body>
+    <div id="es1">
+        <h1>Calcolatore di dislivelli</h1>
+        <p>Inserire in metri della partenza, della pausa e dell' arrivo!</p>
+        <br>
+        <label for="val1">Partenza</label>
+        <input type="text" name="" id="val1">
+        <br><br>
+        <label for="val2">Pausa</label>
+        <input type="text" name="" id="val2">
+        <br><br>
+        <label for="val3">Arrivo</label>
+        <input type="text" name="" id="val3">
+        <br><br>
+        <button id="c1" onclick="calcola()">Calcola</button>
+        <p id="out1">Risultato:</p>
+
+        <button id="showImageBtn1" onclick="showImage(1)">Mostra Immagine partenza</button>
+        <button id="showImageBtn2" onclick="showImage(2)">Mostra Immagine pausa</button>
+        <button id="showImageBtn3" onclick="showImage(3)">Mostra Immagine arrivo</button>
+
+        <div id="image-container1" class="image-container">
+            <img src="base.jpg" alt="Immagine Base">
+        </div>
+
+        <div id="image-container2" class="image-container">
+            <img src="media.jpg" alt="Immagine Media">
+        </div>
+
+        <div id="image-container3" class="image-container">
+            <img src="cima.jpg" alt="Immagine Cima">
+        </div>
+    </div>
+
+    <script>
+        const elementOut = document.getElementById("out1");
+
+        function calcola() {
+
+            let v1 = parseFloat(document.getElementById("val1").value);
+            let v2 = parseFloat(document.getElementById("val2").value);
+            let v3 = parseFloat(document.getElementById("val3").value);
+            
+
+            let dislivelloPartenzaPausa = v2 - v1;
+            let dislivelloPausaArrivo = v3 - v2;
+            let dislivelloTotale = v3 - v1;
+
+            elementOut.innerHTML = ` 
+                Il dislivello tra la partenza e la pausa è ${dislivelloPartenzaPausa} metri.</br>
+                Il dislivello tra la pausa e l'arrivo è ${dislivelloPausaArrivo} metri.</br>
+                Il dislivello totale tra la partenza e l'arrivo è ${dislivelloTotale} metri.
+            `;
+        }
+
+        function showImage(imageNumber) {
+            const imageContainers = document.querySelectorAll('.image-container');
+            imageContainers.forEach(container => {
+                container.style.display = 'none';
+            });
+
+            const selectedImage = document.getElementById(`image-container${imageNumber}`);
+            selectedImage.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
