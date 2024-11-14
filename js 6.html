@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Lezione sul setInterval</h1>
+    <p> Il setInterval è un comando per
+        creare un temporizzatore cioè una chiamata ad una
+        funzione ogni n millisecondi
+    </p>
+    <button onclick="getTime()"> test sul click</button>
+
+    <div>
+            <p id="out1"></p>
+
+    </div>
+    <div>
+
+        <img id="Yaj" style="opacity: 0;"  src="Yaj.webp" alt="">
+
+    </div>
+
+<script>
+    const mioOutput=document.getElementById("out1");
+    const Yaj=document.getElementById("Yaj");
+   setInterval(getTime,10000000000000)
+   let n=3;
+  function getTime(){
+    if(n == -1){
+            mioOutput.style.display = "none";
+            Yaj.style.opacity = 1;
+        };
+
+        mioOutput.innerHTML+=" "+n;
+        n--;
+
+  }
+
+
+
+</script>
+
+</body>
+</html>
