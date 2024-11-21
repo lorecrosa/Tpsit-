@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Gioco Sasso, Carta, Forbice</h1>
+
+<p id="demo">Aspetta...</p>
+<img id="gameImage" src="" alt="Immagine di gioco" style="width:200px;height:200px;"/>
+
+<script>
+
+function updateImage() {
+    let x = Math.floor(Math.random() * 3); 
+    let imagePath = "";
+
+
+    if (x == 0) {
+        imagePath = "https://www.galleriailvicolo.it/wp-content/uploads/2021/01/sessione_studio-073.png"; 
+    } else if (x == 1) {
+        imagePath = "https://cdn.studenti.stbm.it/images/2021/06/16/storia-della-carta_300x200.jpeg"; 
+    } else if (x == 2) {
+        imagePath = "https://merceriafassio.com/cdn/shop/files/forbici-da-sarta--merceria-fassio--genova--fo00001_optimized_720x.jpg?v=1727800056"; 
+    }
+
+    document.getElementById("gameImage").src = imagePath;
+    document.getElementById("demo").innerHTML = "Numero casuale: " + x;
+}
+setInterval(updateImage, 3000);
+</script>
+
+</body>
+</html>
+
