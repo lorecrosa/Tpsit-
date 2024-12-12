@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Array Esercizio</title>
+    <title>Array 2</title>
+    <style>
+        .red {
+            color: red;
+        }
+        .blue {
+            color: blue;
+        }
+    </style>
 </head>
 <body>
 
@@ -20,12 +28,17 @@
             index++; 
 
             let output = "";
-            for (let i = 0; i < numeri.length; i++) {
-                output += numeri[i] + " "; 
+            for (let i = 0; i < index; i++) {
+                if (numeri[i] >= 45) {
+                    output += "<span class='red'>" + numeri[i] + "</span> "; 
+                } else {
+                    output += "<span class='blue'>" + numeri[i] + "</span> "; 
+                }
             }
-            document.getElementById("out1").textContent = "Numeri estratti: " + output;
+            document.getElementById("out1").innerHTML = "Numeri estratti: " + output;
         }
         setInterval(estraiNumero, 3000);
+    
     </script>
 
 </body>
