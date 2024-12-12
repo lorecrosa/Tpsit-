@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Esercizio</title>
+</head>
+<body>
+
+    <h1>Array 2</h1>
+    <p id="out1"></p>
+
+    <script>
+        let numeri = []; 
+        let index = 0; 
+
+        function estraiNumero() {
+            let numero = Math.floor(Math.random() * 90) + 1;
+            numeri[index] = numero; 
+            index++; 
+
+            let output = "";
+            for (let i = 0; i < numeri.length; i++) {
+                output += numeri[i] + " "; 
+            }
+            document.getElementById("out1").textContent = "Numeri estratti: " + output;
+        }
+        setInterval(estraiNumero, 3000);
+    </script>
+
+</body>
+</html>
