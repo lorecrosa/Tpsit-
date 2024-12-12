@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array 1</title>
+
+<style>
+
+    #container{
+        height: 200px;
+        width: 500px;
+        display: inline-block;
+    }
+</style>
+
+
+</head>
+<body>
+
+    <h1>Array esercizio 1</h1>
+
+    <p>Lista elementi:</p>
+
+    <div id="container">
+    <p id="out1"></p>
+     </div>
+
+    <script>
+
+        let numeri=[];
+        RiempiArrayConNumeri()
+        document.getElementById("out1").innerHTML=numeri;
+
+
+
+
+
+            function RiempiArrayConNumeri()
+            {
+                let numero=1;
+                for(let i=1;i<100;i++)
+                    {
+                        
+                        numeri[i]=Math.floor((Math.random() * 100) + 1);
+                        numero++;
+                    }
+
+                   
+        }
+
+    </script>
+   
+</body>
+</html>
