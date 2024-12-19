@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array 2</title>
+    <style>
+        .red {
+            color: red;
+        }
+        .blue {
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Array 2</h1>
+    <p id="out1"></p>
+    <p id="out2"></p>
+
+    <script>
+        let numeri = []; 
+        let index = 0; 
+        let cont_red = 0; 
+        let cont_blue = 0;
+        let interval;
+        let differenza = 0;
+
+        function estraiNumero() {
+            if (index >= 5000){ 
+                clearInterval(interval); 
+                return; 
+            }
+
+            let numero = Math.floor(Math.random() * 90) + 1;
+            numeri[index] = numero; 
+            index++; 
+
+            let output = "";
+            let current_red = 0; 
+            let current_blue = 0;
+
+            if (numero > 45){
+                current_red = 1; 
+                output += "<span class='red'>" + numero + "</span> "; 
+            } else {
+                current_blue = 1; 
+                output += "<span class='blue'>" + numero + "</span> "; 
+            }
+
+            cont_red += current_red;
+            cont_blue += current_blue;
+
+            document.getElementById("out1").innerHTML = 
+                "Numeri estratti: " + output + "<br>" +
+                "Contatore per numeri maggiore 45: " + cont_red + "<br>" + 
+                "Contatore per numeri minore di 45: " + cont_blue;
+
+            differenza = cont_blue - cont_red;
+
+            numeri.push(differenza);
+
+    
+            if (index % 100 === 0){
+                document.getElementById("out2").innerHTML += "<br>Conteggio dopo " + index + " numeri:<br>" + 
+                    "Contatore per numeri maggiore 45: " + cont_red + "<br>" + 
+                    "Contatore per numeri minore di 45: " + cont_blue + "<br>" +
+                    "Differenza: " + differenza;
+            }
+        }
+
+        interval = setInterval(estraiNumero, 1);
+    
+    </script>
+
+</body>
+</html>
