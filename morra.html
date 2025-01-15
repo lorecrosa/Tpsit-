@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Morra Cinese</title>
+    <style>
+        #out2 {
+            font-size: large;
+            color: brown;
+        }
+        .scelta {
+            width: 100px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Morra Cinese</h1>
+    <div>
+        <img src="sasso.jpg" class="scelta" id="sasso" alt="Sasso">
+        <img src="carta.jpg" class="scelta" id="carta" alt="Carta">
+        <img src="forbici.jpg" class="scelta" id="forbice" alt="Forbice">
+    </div>
+    <p id="out1"></p>
+    <p id="out2"></p>
+    <p id="punteggio"></p>
+
+    <script>
+        let morra = ["sasso", "carta", "forbice"];
+        let punteggio = { giocatore: 0, bot: 0 };
+
+        document.querySelectorAll('.scelta').forEach(img => {
+            img.addEventListener('click', function() {
+                let sceltaGiocatore = this.id;
+                let sceltaBot = morra[Math.floor(Math.random() * 3)];
+                document.getElementById("out1").innerHTML = "Hai scelto: " + sceltaGiocatore;
+                document.getElementById("out2").innerHTML = "Il bot ha scelto: " + sceltaBot;
+                aggiornaPunteggio(sceltaGiocatore, sceltaBot);
+            });
+        });
+
+        function aggiornaPunteggio(sceltaGiocatore, sceltaBot) {
+            if (sceltaGiocatore === sceltaBot) {
+                document.getElementById("punteggio").innerHTML = "Pareggio! Punteggio: Giocatore " + punteggio.giocatore + " - Bot " + punteggio.bot;
+            } else if ((sceltaGiocatore === "sasso" && sceltaBot === "forbice") ||
+                       (sceltaGiocatore === "carta" && sceltaBot === "sasso") ||
+                       (sceltaGiocatore === "forbice" && sceltaBot === "carta")) {
+                punteggio.giocatore++;
+                document.getElementById("punteggio").innerHTML = "Hai vinto! Punteggio: Giocatore " + punteggio.giocatore + " - Bot " + punteggio.bot;
+            } else {
+                punteggio.bot++;
+                document.getElementById("punteggio").innerHTML = "Hai perso! Punteggio: Giocatore " + punteggio.giocatore + " - Bot " + punteggio.bot;
+            }
+        }
+    </script>
+</body>
+</html>
