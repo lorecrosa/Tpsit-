@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Bottoni e Timestamp</title>
+  <style>
+    .button {
+      margin: 5px;
+      padding: 10px;
+      font-size: 16px;
+    }
+    #button1 {
+      background-color: red;
+    }
+    #button2 {
+      background-color: green;
+    }
+    #button3 {
+      background-color: blue;
+    }
+    #button4 {
+      background-color: yellow;
+    }
+  </style>
+</head>
+<body>
+  <button class="button" id="button1">Bottone 1</button>
+  <button class="button" id="button2">Bottone 2</button>
+  <button class="button" id="button3">Bottone 3</button>
+  <button class="button" id="button4">Bottone 4</button>
+  
+  <div id="output"></div>
+
+  <script>
+    let primoclick = null;
+    let intervalliTempo = [];
+
+    function stampaDataOra(buttonId) {
+      const ora = new Date();
+      const dataOraStr = ora.toLocaleString();
+      document.getElementById('output').innerText += `Bottone ${buttonId} premuto alle ${dataOraStr}\n`;
+      
+      if (buttonId === 1 && primoclick === null) {
+        primoclick = ora.getTime();
+      } else if (primoclick !== null) {
+        const oraCorrente = ora.getTime();
+        const intervalloTempo = oraCorrente - primoclick;
+        intervalliTempo.push(intervalloTempo);
+        document.getElementById('output').innerText += `Intervallo di tempo dal primo click: ${intervalloTempo} ms\n`;
+      }
+    }
+
+    document.getElementById('button1').addEventListener('click', () => stampaDataOra(1));
+    document.getElementById('button2').addEventListener('click', () => stampaDataOra(2));
+    document.getElementById('button3').addEventListener('click', () => stampaDataOra(3));
+    document.getElementById('button4').addEventListener('click', () => stampaDataOra(4));
+  </script>
+</body>
+</html>
