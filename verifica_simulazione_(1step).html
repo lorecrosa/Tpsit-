@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Generatore di Numeri Casuali</title>
+  <style>
+    .output {
+      margin: 20px;
+      padding: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="output" id="output"></div>
+
+  <script>
+    function generaNumero() {
+      const num = Math.floor(Math.random() * 1000) + 1;
+      const pariDispari = (num % 2 === 0) ? 'pari' : 'dispari';
+      const primo = isPrime(num) ? 'è primo' : 'non è primo';
+      const doppio = num * 2;
+      const metaIntera = Math.floor(num / 2);
+      const complemento = 1000 - num;
+      const sommaPrecedenteSuccessivo = num - 1 + num + (num + 1);
+      const moltiplicazionePi = num * 3.14;
+      
+      document.getElementById('output').innerHTML = `
+        Numero generato: ${num}<br>
+        ${num} è ${pariDispari}<br>
+        ${num} ${primo}<br>
+        Il doppio di ${num} è ${doppio}<br>
+        La metà intera di ${num} è ${metaIntera}<br>
+        Il complemento di ${num} è ${complemento}<br>
+        La somma di ${num}, il suo precedente e il suo successivo è ${sommaPrecedenteSuccessivo}<br>
+        ${num} moltiplicato per 3.14 è ${moltiplicazionePi.toFixed(2)}<br><br>
+      `;
+    }
+
+    function isPrime(num) {
+      for (let i = 2, s = Math.sqrt(num); i <= s; i++)
+        if (num % i === 0) return false;
+      return num > 1;
+    }
+
+    setInterval(generaNumero, 5000);
+  </script>
+</body
