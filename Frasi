@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generatore di Frasi Casuali</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f4f9;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .container {
+            max-width: 600px;
+            margin-top: 100px;
+        }
+
+        .card {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .btn {
+            font-size: 16px;
+        }
+
+        #randomPhrase {
+            font-size: 1.5rem;
+            margin-top: 20px;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card shadow-lg">
+            <h2 class="card-title">Generatore di Frasi Casuali</h2>
+            <p class="card-text">Clicca il pulsante per generare una frase casuale.</p>
+            <button id="generateBtn" class="btn btn-primary">Genera Frase</button>
+            <p id="randomPhrase"></p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        const frasi = [
+            "La vita è bella, bisogna viverla al massimo!",
+            "Ogni giorno è una nuova opportunità per imparare.",
+            "Non smettere mai di sognare.",
+            "Il successo è la somma di piccoli sforzi ripetuti.",
+            "La felicità non è qualcosa di pronto, viene dalle tue azioni.",
+            "Se non provi, non saprai mai cosa puoi fare.",
+            "Le sfide sono ciò che rende la vita interessante."
+        ];
+
+        function generaFrase() {
+            const fraseCasuale = frasi[Math.floor(Math.random() * frasi.length)];
+            document.getElementById("randomPhrase").textContent = fraseCasuale;
+        }
+
+        document.getElementById("generateBtn").addEventListener("click", generaFrase);
+    </script>
+</body>
+
+</html>
