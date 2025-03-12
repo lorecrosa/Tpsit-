@@ -17,31 +17,17 @@
         .container {
             text-align: center;
         }
-        input, button {
-            padding: 10px;
-            margin: 5px 0;
-            width: 100%;
-            max-width: 300px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
+        p {
+            font-size: 18px;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Genera una frase</h1>
-        <input type="text" id="subject" placeholder="Soggetto">
-        <input type="text" id="verb" placeholder="Verbo">
-        <input type="text" id="object" placeholder="Oggetto">
+        <h1>Generatore di frasi casuali</h1>
+        <p>Questo programma genera una frase casuale ogni 3 secondi, utilizzando un soggetto, un verbo e un complemento predefiniti. Puoi vedere ogni frase cambiare automaticamente sullo schermo!</p>
+        <p>Guarda la frase cambiare ogni pochi secondi e scopri combinazioni divertenti tra soggetti, verbi e complementi.</p>
         <p id="result"></p>
     </div>
 
@@ -60,24 +46,8 @@
         }
 
         setInterval(generateRandomPhrase, 3000);
-
-        function generatePhrase() {
-            const subject = document.getElementById('subject').value;
-            const verb = document.getElementById('verb').value;
-            const object = document.getElementById('object').value;
-
-            if (subject && verb && object) {
-                const phrase = `${subject} ${verb} ${object}.`;
-                document.getElementById('result').textContent = phrase;
-            } else {
-                document.getElementById('result').textContent = '';
-            }
-        }
-
-        document.getElementById('subject').addEventListener('input', generatePhrase);
-        document.getElementById('verb').addEventListener('input', generatePhrase);
-        document.getElementById('object').addEventListener('input', generatePhrase);
     </script>
 
 </body>
 </html>
+
