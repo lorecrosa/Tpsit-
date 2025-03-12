@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generatore di frasi casuali</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 8px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Generatore di frasi casuali</h1>
+        <form id="phraseForm">
+            <label for="subject">Soggetto:</label>
+            <input type="text" id="subject" placeholder="Es. Il cane, Un ragazzo, La macchina" required>
+
+            <label for="verb">Verbo:</label>
+            <input type="text" id="verb" placeholder="Es. corre, mangia, salta" required>
+
+            <label for="object">Oggetto:</label>
+            <input type="text" id="object" placeholder="Es. il pallone, un biscotto, la palla" required>
+
+            <button type="submit">Genera frase</button>
+        </form>
+
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        document.getElementById('phraseForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const subject = document.getElementById('subject').value;
+            const verb = document.getElementById('verb').value;
+            const object = document.getElementById('object').value;
+            const phrases = [
+                `${subject} ${verb} ${object}.`,
+                `Oggi, ${subject} ha deciso di ${verb} ${object}.`,
+                `Stranamente, ${subject} non riesce a ${verb} ${object}.`,
+                `In un mondo ideale, ${subject} potrebbe ${verb} ${object}.`
+            ];
+            const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
+            document.getElementById('result').textContent = randomPhrase;
+        });
+    </script>
+
+</body>
+</html>
