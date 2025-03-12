@@ -38,8 +38,8 @@
         <div class="card" style="width: 18rem;">
           <img src="logojs.jpg.png" class="card-img-top" alt="Logo">
           <div class="card-body">
-            <h5 class="card-title">ESERCIZIO JS 2</h5>
-            <a href="es2_java.html" class="btn btn-primary">APRI!</a>
+            <h5 class="card-title">EVOLUZIONE DI INTERNET</h5>
+            <a href="evoluzione_internet" class="btn btn-primary">APRI!</a>
           </div>
         </div>
       </div>
