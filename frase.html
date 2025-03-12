@@ -46,6 +46,21 @@
     </div>
 
     <script>
+        const soggetti = ["Mario", "Luca", "Giulia", "Anna", "Francesco", "Elena", "Roberto", "Sara", "Davide", "Chiara"];
+        const verbi = ["mangia", "corre", "legge", "scrive", "disegna", "parla", "cammina", "guarda", "ascolta", "gioca"];
+        const complemento = ["una mela", "nel parco", "un libro", "una lettera", "un quadro", "al telefono", "sul marciapiede", "la TV", "musica", "a calcio"];
+
+        function generateRandomPhrase() {
+            const randomSubject = soggetti[Math.floor(Math.random() * soggetti.length)];
+            const randomVerb = verbi[Math.floor(Math.random() * verbi.length)];
+            const randomObject = complemento[Math.floor(Math.random() * complemento.length)];
+
+            const randomPhrase = `${randomSubject} ${randomVerb} ${randomObject}.`;
+            document.getElementById('result').textContent = randomPhrase;
+        }
+
+        setInterval(generateRandomPhrase, 3000);
+
         function generatePhrase() {
             const subject = document.getElementById('subject').value;
             const verb = document.getElementById('verb').value;
@@ -62,24 +77,7 @@
         document.getElementById('subject').addEventListener('input', generatePhrase);
         document.getElementById('verb').addEventListener('input', generatePhrase);
         document.getElementById('object').addEventListener('input', generatePhrase);
-
-
-        function generateRandomPhrase() {
-            const subjects = ['Il cane', 'Una persona', 'L\'elefante', 'Una macchina', 'La ragazza'];
-            const verbs = ['mangia', 'corre', 'salta', 'guarda', 'studia'];
-            const objects = ['la palla', 'un libro', 'un albero', 'la strada', 'un piatto'];
-
-            const randomSubject = subjects[Math.floor(Math.random() * subjects.length)];
-            const randomVerb = verbs[Math.floor(Math.random() * verbs.length)];
-            const randomObject = objects[Math.floor(Math.random() * objects.length)];
-
-            const randomPhrase = `${randomSubject} ${randomVerb} ${randomObject}.`;
-            document.getElementById('result').textContent = randomPhrase;
-        }
-
-        setInterval(generateRandomPhrase, 3000);
     </script>
 
 </body>
 </html>
-
