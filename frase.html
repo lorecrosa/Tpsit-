@@ -8,76 +8,52 @@
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
             background-color: #f9f9f9;
         }
-        input[type="text"] {
+        .container {
+            text-align: center;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px 0;
             width: 100%;
-            padding: 8px;
-            margin: 10px 0;
+            max-width: 300px;
             border: 1px solid #ccc;
             border-radius: 5px;
         }
         button {
-            padding: 10px 20px;
             background-color: #4CAF50;
             color: white;
-            border: none;
-            border-radius: 5px;
             cursor: pointer;
         }
         button:hover {
             background-color: #45a049;
-        }
-        .result {
-            margin-top: 20px;
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #333;
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <h1>Generatore di frasi casuali</h1>
-        <form id="phraseForm">
-            <label for="subject">Soggetto:</label>
-            <input type="text" id="subject" placeholder="Es. Il cane, Un ragazzo, La macchina" required>
-
-            <label for="verb">Verbo:</label>
-            <input type="text" id="verb" placeholder="Es. corre, mangia, salta" required>
-
-            <label for="object">Oggetto:</label>
-            <input type="text" id="object" placeholder="Es. il pallone, un biscotto, la palla" required>
-
-            <button type="submit">Genera frase</button>
-        </form>
-
-        <div class="result" id="result"></div>
+        <h1>Genera una frase</h1>
+        <input type="text" id="subject" placeholder="Soggetto">
+        <input type="text" id="verb" placeholder="Verbo">
+        <input type="text" id="object" placeholder="Oggetto">
+        <button onclick="generatePhrase()">Genera</button>
+        <p id="result"></p>
     </div>
 
     <script>
-        document.getElementById('phraseForm').addEventListener('submit', function(event) {
-            event.preventDefault();
+        function generatePhrase() {
             const subject = document.getElementById('subject').value;
             const verb = document.getElementById('verb').value;
             const object = document.getElementById('object').value;
-            const phrases = [
-                `${subject} ${verb} ${object}.`,
-                `Oggi, ${subject} ha deciso di ${verb} ${object}.`,
-                `Stranamente, ${subject} non riesce a ${verb} ${object}.`,
-                `In un mondo ideale, ${subject} potrebbe ${verb} ${object}.`
-            ];
-            const randomPhrase = phrases[Math.floor(Math.random() * phrases.length)];
-            document.getElementById('result').textContent = randomPhrase;
-        });
+            const phrase = `${subject} ${verb} ${object}.`;
+            document.getElementById('result').textContent = phrase;
+        }
     </script>
 
 </body>
