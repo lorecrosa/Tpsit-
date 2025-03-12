@@ -42,7 +42,6 @@
         <input type="text" id="subject" placeholder="Soggetto">
         <input type="text" id="verb" placeholder="Verbo">
         <input type="text" id="object" placeholder="Oggetto">
-        <button onclick="generatePhrase()">Genera</button>
         <p id="result"></p>
     </div>
 
@@ -51,10 +50,36 @@
             const subject = document.getElementById('subject').value;
             const verb = document.getElementById('verb').value;
             const object = document.getElementById('object').value;
-            const phrase = `${subject} ${verb} ${object}.`;
-            document.getElementById('result').textContent = phrase;
+
+            if (subject && verb && object) {
+                const phrase = `${subject} ${verb} ${object}.`;
+                document.getElementById('result').textContent = phrase;
+            } else {
+                document.getElementById('result').textContent = '';
+            }
         }
+
+        document.getElementById('subject').addEventListener('input', generatePhrase);
+        document.getElementById('verb').addEventListener('input', generatePhrase);
+        document.getElementById('object').addEventListener('input', generatePhrase);
+
+
+        function generateRandomPhrase() {
+            const subjects = ['Il cane', 'Una persona', 'L\'elefante', 'Una macchina', 'La ragazza'];
+            const verbs = ['mangia', 'corre', 'salta', 'guarda', 'studia'];
+            const objects = ['la palla', 'un libro', 'un albero', 'la strada', 'un piatto'];
+
+            const randomSubject = subjects[Math.floor(Math.random() * subjects.length)];
+            const randomVerb = verbs[Math.floor(Math.random() * verbs.length)];
+            const randomObject = objects[Math.floor(Math.random() * objects.length)];
+
+            const randomPhrase = `${randomSubject} ${randomVerb} ${randomObject}.`;
+            document.getElementById('result').textContent = randomPhrase;
+        }
+
+        setInterval(generateRandomPhrase, 3000);
     </script>
 
 </body>
 </html>
+
