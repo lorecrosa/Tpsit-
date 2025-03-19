@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form di Input</title>
+</head>
+<body>
+
+    <h2>Form di Input</h2>
+    <form id="myForm">
+        <input type="text" id="inputA">
+        <br><br>
+        <input type="text" id="inputB">
+        <br><br>
+        <button type="button" onclick="processInputs()">Invia</button>
+    </form>
+
+    <div id="output"></div>
+
+    <script>
+        function processInputs() {
+            var inputA = document.getElementById('inputA').value;
+            var inputB = document.getElementById('inputB').value;
+
+            var lengthA = inputA.length;
+            var lengthB = inputB.length;
+
+            var output = document.getElementById('output');
+            output.innerHTML = '<p>Lunghezza A: ' + lengthA + '</p>' +
+                               '<p>Lunghezza B: ' + lengthB + '</p>' +
+                               '<p>Contrario B: ' + inputB.split('').reverse().join('') + '</p>' +
+                               '<p>Unione: ' + inputA + inputB + '</p>' +
+                               '<p>Somma lunghezze: ' + (lengthA + lengthB) + '</p>';
+
+            if (lengthB > 20) {
+                output.innerHTML += '<p style="color: red;">B troppo lunga!</p>';
+            }
+        }
+    </script>
+
+</body>
+</html>
+
