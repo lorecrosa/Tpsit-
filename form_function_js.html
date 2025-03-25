@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Funzione di Attivazione Neuronale</title>
+</head>
+<body>
+    <h1>Funzione di Attivazione Neuronale</h1>
+    
+    <form id="inputForm">
+        <label for="a">a:</label>
+        <input type="number" id="a" required><br><br>
+        
+        <label for="b">b:</label>
+        <input type="number" id="b" required><br><br>
+        
+        <label for="c">c:</label>
+        <input type="number" id="c" required><br><br>
+        
+        <label for="d">d:</label>
+        <input type="number" id="d" required><br><br>
+        
+        <button type="button" onclick="calcola()">Calcola</button>
+    </form>
+    
+    <h2>Risultati:</h2>
+    <p id="output1">Primo Output: </p>
+    <p id="output2">Secondo Output: </p>
+    
+    <script>
+        function sigmoide(x) {
+            return 1 / (1 + Math.exp(-x));
+        }
+
+        function calcola() {
+            let a = parseFloat(document.getElementById('a').value);
+            let b = parseFloat(document.getElementById('b').value);
+            let c = parseFloat(document.getElementById('c').value);
+            let d = parseFloat(document.getElementById('d').value);
+
+            let output1 = (a + b * c) / d;
+            let output2 = sigmoide(output1);
+
+            document.getElementById('output1').innerText = "Primo Output: " + output1;
+            document.getElementById('output2').innerText = "Secondo Output (Sigmoide): " + output2;
+        }
+    </script>
+</body>
+</html>
