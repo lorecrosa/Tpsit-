@@ -35,12 +35,12 @@
         let nomeInput = document.getElementById('nome');
         let emailInput = document.getElementById('email');
 
-        function iniziaGioco() {
+        function iniziaGioco(){
             formulario.style.display = 'none';
             clickTempi = [];
             let inizioGioco = new Date().getTime();
 
-            punto.onclick = function() {
+            punto.onclick = function(){
                 let oraClick = new Date().getTime();
                 clickTempi.push(oraClick - inizioGioco);
                 if (clickTempi.length === 10) {
@@ -61,7 +61,7 @@
             risultati.style.display = 'block'; 
         }
 
-        function ripartiGioco() {
+        function ripartiGioco(){
             risultati.style.display = 'none';
             formulario.style.display = 'block';
             nomeInput.value = '';
