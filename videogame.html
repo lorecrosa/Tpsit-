@@ -4,41 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gioco del Clic</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .areaGioco {
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background-color: black;
-            position: relative;
-        }
-        .punto{
-            color: white;
-        .risultati {
-            display: none;
-        }
-    </style>
 </head>
 <body>
-    <div class="container text-center">
-        <h1>Gioco del Clic</h1>
-        <div id="formulario">
-            <input type="text" id="nome" class="form-control" placeholder="Nome" required><br>
-            <input type="email" id="email" class="form-control" placeholder="Email" required><br>
-            <button onclick="iniziaGioco()" class="btn btn-primary">Inizia Gioco</button>
-        </div>
+    <h1>Gioco del Click</h1>
 
-        <div id="areaGioco">
-            <div id="punto" class="punto"></div>
-        </div>
+    <div id="formulario">
+        <input type="text" id="nome" placeholder="Nome" required><br>
+        <input type="email" id="email" placeholder="Email" required><br>
+        <button onclick="iniziaGioco()">Inizia Gioco</button>
+    </div>
 
-        <div id="risultati" class="risultati">
-            <p id="tempoTotale"></p>
-            <p id="tempoMedio"></p>
-        </div>
+    <div id="areaGioco" style="width: 500px; height: 500px; background-color: black; position: relative; margin: 20px auto;">
+        <div id="punto" style="width: 50px; height: 50px; background-color: white; border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+    </div>
+
+    <div id="risultati" style="display: none;">
+        <p id="nomeUtente"></p>
+        <p id="emailUtente"></p>
+        <p id="tempoTotale"></p>
+        <p id="tempoMedio"></p>
+        <button onclick="ripartiGioco()">Ripeti il gioco</button>
     </div>
 
     <script>
@@ -47,33 +32,40 @@
         let areaGioco = document.getElementById('areaGioco');
         let risultati = document.getElementById('risultati');
         let formulario = document.getElementById('formulario');
+        let nomeInput = document.getElementById('nome');
+        let emailInput = document.getElementById('email');
 
         function iniziaGioco() {
             formulario.style.display = 'none';
             clickTempi = [];
-            spostaPunto();
+            let inizioGioco = new Date().getTime();
 
             punto.onclick = function() {
-                clickTempi.push(new Date().getTime());
-                if (clickTempi.length === 10) finisciGioco();
-                else spostaPunto();
+                let oraClick = new Date().getTime();
+                clickTempi.push(oraClick - inizioGioco);
+                if (clickTempi.length === 10) {
+                    finisciGioco();
+                }
             };
         }
 
-        function spostaPunto() {
-            let x = Math.random() * (areaGioco.offsetWidth - 50);
-            let y = Math.random() * (areaGioco.offsetHeight - 50);
-            punto.style.left = x + 'px';
-            punto.style.top = y + 'px';
-            punto.style.backgroundColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+        function finisciGioco() {
+            let tempoTotale = clickTempi[clickTempi.length - 1] / 1000; 
+            let tempoMedio = clickTempi.reduce((acc, tempo) => acc + tempo, 0) / clickTempi.length / 1000; 
+            
+            document.getElementById('nomeUtente').innerText = 'Nome: ' + nomeInput.value;
+            document.getElementById('emailUtente').innerText = 'Email: ' + emailInput.value;
+            document.getElementById('tempoTotale').innerText = 'Tempo Totale: ' + tempoTotale.toFixed(2) + ' secondi';
+            document.getElementById('tempoMedio').innerText = 'Tempo Medio: ' + tempoMedio.toFixed(2) + ' secondi';
+            
+            risultati.style.display = 'block'; 
         }
 
-        function finisciGioco() {
-            let tempoTotale = (new Date().getTime() - clickTempi[0]) / 1000;
-            let tempoMedio = tempoTotale / clickTempi.length;
-            document.getElementById('tempoTotale').innerText = 'Tempo Totale: ' + tempoTotale.toFixed(2) + ' s';
-            document.getElementById('tempoMedio').innerText = 'Tempo Medio: ' + tempoMedio.toFixed(2) + ' s';
-            risultati.style.display = 'block';
+        function ripartiGioco() {
+            risultati.style.display = 'none';
+            formulario.style.display = 'block';
+            nomeInput.value = '';
+            emailInput.value = '';
         }
     </script>
 </body>
