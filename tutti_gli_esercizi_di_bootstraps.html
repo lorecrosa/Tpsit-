@@ -1,58 +1,75 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <title>ESERCIZI BOOTSTRAPS</title>
-  <style>
-    body { background-color: white; }
-    .navbar-brand img { padding: 5px; width: auto; height: 30px; }
-    .card { height: 100%; }
-    .card-img-top { 
-      width: 80%;
-      height: auto;
-      object-fit: cover;
-      margin: 0 auto;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>Gioco del Clic</title>
 </head>
 <body>
-  <nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">
-      <img src="logo_bootstraps.png" width="30" height="30" class="d-inline-block align-top" alt="">
-      CROSA LORENZO
-    </a>
-  </nav>
-  <div class="container my-5 text-center" style="max-width: 580px;">
-    <h1>ESERCIZI BOOTSTRAPS</h1>
-    <p class="lead">TUTTI GLI ESERCIZI DI BOOTSTRAPS</p>
-  </div>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm mb-4">
-        <div class="card" style="width: 18rem;">
-          <img src="logo_bootstraps.png" class="card-img-top" alt="Logo">
-          <div class="card-body">
-            <h5 class="card-title">MEMORY GAME</h5>
-            <a href="memory_game.html" class="btn btn-primary">APRI!</a>
-          </div>
-        </div>
-      </div>
-      <div class="col-sm mb-4">
-        <div class="card" style="width: 18rem;">
-          <img src="logo_bootstraps.png" class="card-img-top" alt="Logo">
-          <div class="card-body">
-            <h5 class="card-title">EVOLUZIONE DI INTERNET</h5>
-            <a href="evoluzione_internet" class="btn btn-primary">APRI!</a>
-          </div>
-        </div>
-      </div>
+    <h1>Gioco del Click</h1>
+    <h4>Fai 10 click nel minor tempo possibile</h4>
+
+    <div id="formulario">
+        <input type="text" id="nome" placeholder="Nome" required><br>
+        <input type="email" id="email" placeholder="Email" required><br>
+        <button onclick="iniziaGioco()">Inizia Gioco</button>
     </div>
-  </div>
-  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    <div id="areaGioco" style="width: 500px; height: 500px; background-color: black; position: relative; margin: 20px auto;">
+        <div id="punto" style="width: 50px; height: 50px; background-color: white; border-radius: 50%; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></div>
+    </div>
+
+    <div id="risultati" style="display: none;">
+        <p id="nomeUtente"></p>
+        <p id="emailUtente"></p>
+        <p id="tempoTotale"></p>
+        <button onclick="ripartiGioco()">Ripeti il gioco</button>
+    </div>
+
+    <script>
+        let clickTempi = [];
+        let punto = document.getElementById('punto');
+        let areaGioco = document.getElementById('areaGioco');
+        let risultati = document.getElementById('risultati');
+        let formulario = document.getElementById('formulario');
+        let nomeInput = document.getElementById('nome');
+        let emailInput = document.getElementById('email');
+
+        function iniziaGioco() {
+            formulario.style.display = 'none';
+            clickTempi = [];
+            let inizioGioco = new Date().getTime();
+
+            punto.onclick = function(){
+                let oraClick = new Date().getTime();
+                clickTempi.push(oraClick - inizioGioco);
+                if (clickTempi.length === 10) {
+                    finisciGioco();
+                }
+            };
+        }
+
+        function finisciGioco() {
+            let tempoTotale = clickTempi[clickTempi.length - 1] / 1000; 
+            let tempoMedio = clickTempi.reduce((acc, tempo) => acc + tempo, 0) / clickTempi.length / 1000; 
+            
+            document.getElementById('nomeUtente').innerText = 'Nome: ' + nomeInput.value;
+            document.getElementById('emailUtente').innerText = 'Email: ' + emailInput.value;
+            document.getElementById('tempoTotale').innerText = 'Tempo Totale: ' + tempoTotale.toFixed(2) + ' secondi';
+            
+            risultati.style.display = 'block'; 
+        }
+
+        function ripartiGioco(){
+            risultati.style.display = 'none';
+            formulario.style.display = 'block';
+            nomeInput.value = '';
+            emailInput.value = '';
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>
 </html>
-
