@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Div Casuali</title>
+    <style>
+        body { margin: 0; overflow: hidden; }
+        .scatola { width: 100px; height: 100px; position: absolute; }
+        .blu { background: blue; }
+        .gialla { background: yellow; }
+    </style>
+</head>
+<body>
+
+    <div class="scatola blu" id="blu"></div>
+    <div class="scatola gialla" id="gialla"></div>
+
+    <script>
+        function muovi() {
+            let maxLarghezza = window.innerWidth - 100;
+            let maxAltezza = window.innerHeight - 100;
+
+            let bluX = Math.random() * maxLarghezza;
+            let bluY = Math.random() * maxAltezza;
+            let giallaX = Math.random() * maxLarghezza;
+            let giallaY = Math.random() * maxAltezza;
+
+            blu.style.left = bluX + 'px';
+            blu.style.top = bluY + 'px';
+            gialla.style.left = giallaX + 'px';
+            gialla.style.top = giallaY + 'px';
+
+            if (bluX < giallaX + 100 && bluX + 100 > giallaX &&
+                bluY < giallaY + 100 && bluY + 100 > giallaY) {
+                blu.style.background = 'red';
+                gialla.style.background = 'red';
+            } else {
+                blu.style.background = 'blue';
+                gialla.style.background = 'yellow';
+            }
+        }
+
+        setInterval(muovi, 1000);
+    </script>
+
+</body>
+</html>
