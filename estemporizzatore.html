@@ -3,46 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Div Casuali</title>
+    <title>Applicazioni JavaScript</title>
     <style>
-        body { margin: 0; overflow: hidden; }
-        .scatola { width: 100px; height: 100px; position: absolute; }
-        .blu { background: blue; }
-        .gialla { background: yellow; }
+        #square {
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            position: absolute;
+            top: 50px;
+            left: 100px;
+        }
+        .square {
+            width: 50px;
+            height: 50px;
+            margin: 5px;
+            display: inline-block;
+            background-color: yellow;
+        }
+        .red {
+            background-color: red;
+        }
+        #squares-container {
+            margin-top: 200px;
+        }
     </style>
 </head>
 <body>
-
-    <div class="scatola blu" id="blu"></div>
-    <div class="scatola gialla" id="gialla"></div>
+    <div id="square"></div>
+    <div id="squares-container"></div>
 
     <script>
-        function muovi() {
-            let maxLarghezza = window.innerWidth - 100;
-            let maxAltezza = window.innerHeight - 100;
+        let square = document.getElementById("square");
+        let position = { x: 100, y: 50 };
+        let directions = [
+            () => position.x += 50,  
+            () => position.y += 50,   
+            () => position.x -= 50,   
+            () => position.y -= 50    
+        ];
+        let currentDirection = 0;
 
-            let bluX = Math.random() * maxLarghezza;
-            let bluY = Math.random() * maxAltezza;
-            let giallaX = Math.random() * maxLarghezza;
-            let giallaY = Math.random() * maxAltezza;
-
-            blu.style.left = bluX + 'px';
-            blu.style.top = bluY + 'px';
-            gialla.style.left = giallaX + 'px';
-            gialla.style.top = giallaY + 'px';
-
-            if (bluX < giallaX + 100 && bluX + 100 > giallaX &&
-                bluY < giallaY + 100 && bluY + 100 > giallaY) {
-                blu.style.background = 'red';
-                gialla.style.background = 'red';
-            } else {
-                blu.style.background = 'blue';
-                gialla.style.background = 'yellow';
-            }
+        function moveSquare() {
+            directions[currentDirection]();
+            square.style.left = position.x + "px";
+            square.style.top = position.y + "px";
+            currentDirection = (currentDirection + 1) % 4;
         }
 
-        setInterval(muovi, 1000);
-    </script>
+        setInterval(moveSquare, 500);
 
+        let container = document.getElementById("squares-container");
+        let squares = [];
+        let currentIndex = 0;
+
+        for (let i = 0; i < 8; i++) {
+            let square = document.createElement("div");
+            square.classList.add("square");
+            container.appendChild(square);
+            squares.push(square);
+        }
+
+        function moveSquares() {
+            squares[currentIndex].classList.remove("red");
+            currentIndex = (currentIndex + 1) % 8;
+            squares[currentIndex].classList.add("red");
+        }
+
+        setInterval(moveSquares, 500);
+    </script>
 </body>
 </html>
