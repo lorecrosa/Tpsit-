@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impiccato - Esempio JavaScript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        .game-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        input[type="text"] {
+            font-size: 24px;
+            text-align: center;
+            padding: 10px;
+            width: 250px;
+            margin: 10px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .letters a {
+            font-size: 20px;
+            margin: 5px;
+            text-decoration: none;
+            color: #007BFF;
+        }
+        .letters a:hover {
+            color: #0056b3;
+        }
+        .reset-link {
+            font-size: 22px;
+            margin-top: 20px;
+            display: block;
+            color: #007BFF;
+        }
+        .reset-link:hover {
+            color: #0056b3;
+        }
+        .tentativi-sbagliati {
+            font-size: 20px;
+            margin-top: 10px;
+            color: red;
+        }
+        .impiccato {
+            font-family: monospace;
+            white-space: pre;
+            font-size: 24px;
+            color: #ff4500;
+        }
+    </style>
+    <script>
+        let giocoAttivo = true;
+        const parole = ["CASA", "PANE", "CIELO", "SOLE", "MARE", "ALBERO", "FIORE", "FIUME", "MONTAGNA", "STRADA", "AMICO", "LUNA", 
+		"TEMPO", "VENTO", "LIBRO", "SCUOLA", "GIARDINO", "FAMIGLIA", "LAVORO", "AUTO", "TAVOLO", "SEDIA", "PORTA", "FINESTRA", "BICICLETTA", 
+		"COMPUTER", "TELEFONO", "ZAINO", "GIOCO", "PIEDI", "OCCHI", "NASO", "ORECCHIE", "BAMBINO", "ADULTO", "CANE", "GATTO", "UCCELLO", "PESCE", 
+		"CONIGLIO", "ALIMENTO", "LATTE", "ACQUA", "VINO", "BIRRA", "TÈ", "CAFFÈ", "SALE", "ZUCCHERO", "OLIO", "BURRO", "FORMAGGIO", "CARNE", "PESCE", 
+		"VERDURA", "FRUTTA", "POLLO", "TORTA", "GELATO", "PASTA", "PIZZA", "SUGO", "UOVO", "FARINA", "RISO", "MAIS", "SALE", "PEPE", "MIELE", "CAFFÈ", 
+		"CAPELLO", "GIACCA", "MAGLIA", "PANTALONI", "SCARPE", "CALZE", "CINTURA", "OROLOGIO", "COLLANA", "BRACCIALE", "ANELLO", "SPAZZOLA", "DENTIFRICIO", 
+		"SPAZZOLINO", "SAPONE", "SHAMPOO", "ASCIUGAMANO", "PIGIAMA", "LIBERTÀ", "AMORE", "SPERANZA", "PACE", "FELICITÀ", "GIOIA", "TRISTEZZA", "DOMENICA", "LUNEDÌ", 
+		"MARTEDÌ", "MERCOLEDÌ", "GIOVEDÌ", "VENERDÌ", "SABATO", "NASCITA", "MORTE", "MATRIMONIO", "AMORE", "SPERANZA", "FUTURO", "PASSATO", "PRESENTE", "SEGRETO", "RISATA", 
+		"PIANTO", "SOGNO", "REALITÀ", "GIOCO", "GIOCATTOLO", "SEDIA", "TAVOLA", "PIATTO", "FORCHETTA", "COLTELLO", "CUCCHIAIO", "BICCHIERE", "TAZZA", "TOVAGLIOLO", "PIATTINO", 
+		"BICCHIERE", "CAFFÈ", "LATTE", "MOKA", "SCRIVANIA", "COMPUTER", "TELEFONO", "MONITOR", "TASTIERA", "MOUSE", "CUFFIE", "CARICABATTERIE", "LAMPADE", "PORTA", "CASSETTO", 
+		"ARMADIO", "POLTRONA", "LETTO", "MATERASSO", "CUSCINO", "LENZUOLA", "COPERTA", "TRAPUNTA", "SPAZZOLINO", "SHAMPOO", "BAGNOSCHIUMA", "DENTIFRICIO", "ASCIUGAMANO", "SALVIETTE", 
+		"SAPONE", "CREMA", "PARRUCCHIERE", "BARBIERE", "TENDE", "TAPPETO", "COPERTA", "PIUMONE", "TAVOLINO", "SPECCHIO", "TENDA", "VASO", "FIORIERA", "CESTO", "PORTAOMBRELLI", 
+		"ATTACCAPANNI", "DIVANO", "POLTRONA", "CUSCINO", "PIANTA", "ORCHIDEA", "ROSMARINO", "MENTA", "BASILICO", "PAPAVERO", "GIRASOLE", "CAMOMILLA", "CEDRO", "LIMONE", "ARANCIO", 
+		"PINO", "ABETE", "QUERCIA", "BETULLA", "PIOPPO", "ACERO", "OLIVO", "CASTAGNO", "MELO", "PERO", "CILIEGIO", "FRAGOLA", "MIRTILLO", "MELONE", "ANGURIA", "KIWI", "ARANCIA", 
+		"POMPELMO", "BANANA", "MANGO", "PESCA", "ALBICOCCA", "PERE", "PRUGNA", "UVA", "CILIEGIA", "MORE", "LAMPONI", "GOJI", "COCCO", "MANDORLA", "NOCCIOLA", "CASTAGNA", "NOCI", 
+		"PINOLI", "SEMI", "LEGUMI", "LENTICCHIE", "CECI", "FAGIOLI", "PISELLI", "SOIA", "FAVE", "MAIS", "RISO", "FARRO", "GRANO", "SEGALE"];
+        let parolaDaIndovinare = "";
+        let parolaVisualizzata = "";
+        let lettereUsate = "";
+        let tentativiSbagliati = 0;
+
+        const impiccatoGrafico = [
+            `
+              ------
+              |    |
+                   |
+                   |
+                   |
+                   |
+                   |
+            -----------
+            `,
+            `
+              ------
+              |    |
+              O    |
+                   |
+                   |
+                   |
+                   |
+            -----------
+            `,
+            `
+              ------
+              |    |
+              O    |
+              |    |
+                   |
+                   |
+                   |
+            -----------
+            `,
+            `
+              ------
+              |    |
+              O    |
+             /|    |
+                   |
+                   |
+                   |
+            -----------
+            `,
+            `
+              ------
+              |    |
+              O    |
+             /|\\   |
+                   |
+                   |
+                   |
+            -----------
+            `,
+            `
+              ------
+              |    |
+              O    |
+             /|\\   |
+             /     |
+                   |
+                   |
+            -----------
+            `,
+            `
+              ------
+              |
+			      |
+              O    |
+             /|\\   |
+             / \\   |
+                   |
+                   |
+            -----------
+            `
+        ];
+
+        function selezionaLettera(lettera) {
+            if (!giocoAttivo || lettereUsate.includes(lettera)) return;
+
+            lettereUsate += lettera;
+            document.getElementById("lettereUsate").value = lettereUsate;
+
+            if (parolaDaIndovinare.includes(lettera)) {
+                parolaVisualizzata = aggiornaParolaVisualizzata(lettera);
+                document.getElementById("parolaVisualizzata").value = parolaVisualizzata;
+
+                if (!parolaVisualizzata.includes("#")) {
+                    alert("Vinto!");
+                    giocoAttivo = false;
+                }
+            } else {
+                tentativiSbagliati++;
+                aggiornaTentativiSbagliati();
+                aggiornaImpiccato();
+
+                if (tentativiSbagliati === 7) {
+                    alert("Hai perso! La parola era: " + parolaDaIndovinare);
+                    giocoAttivo = false;
+                }
+            }
+        }
+
+        function aggiornaParolaVisualizzata(lettera) {
+            let nuovaParola = "";
+            for (let i = 0; i < parolaDaIndovinare.length; i++) {
+                nuovaParola += parolaDaIndovinare[i] === lettera ? lettera : parolaVisualizzata[i];
+            }
+            return nuovaParola;
+        }
+
+        function aggiornaTentativiSbagliati() {
+            document.getElementById("tentativiSbagliati").textContent = `Tentativi sbagliati: ${tentativiSbagliati}/7`;
+        }
+
+        function aggiornaImpiccato() {
+            document.getElementById("impiccato").textContent = impiccatoGrafico[tentativiSbagliati - 1];
+        }
+
+        function resetta() {
+            selezionaParola();
+            lettereUsate = "";
+            document.getElementById("lettereUsate").value = lettereUsate;
+            tentativiSbagliati = 0;
+            aggiornaTentativiSbagliati();
+            document.getElementById("impiccato").textContent = impiccatoGrafico[0];
+        }
+
+        function selezionaParola() {
+            giocoAttivo = true;
+            parolaDaIndovinare = parole[Math.floor(Math.random() * parole.length)];
+            parolaVisualizzata = "#".repeat(parolaDaIndovinare.length);
+            document.getElementById("parolaVisualizzata").value = parolaVisualizzata;
+        }
+
+        document.addEventListener("DOMContentLoaded", resetta);
+    </script>
+</head>
+<body>
+    <div class="game-container">
+        <h2>Gioco dell'Impiccato</h2>
+        <form name="gioco">
+            <p>Parola: <input id="parolaVisualizzata" type="text" readonly><br>
+            Lettere: <input id="lettereUsate" type="text" readonly></p>
+        </form>
+
+        <div class="letters">
+            <a href="javascript:selezionaLettera('A');">A</a> |
+            <a href="javascript:selezionaLettera('B');">B</a> |
+            <a href="javascript:selezionaLettera('C');">C</a> |
+            <a href="javascript:selezionaLettera('D');">D</a> |
+            <a href="javascript:selezionaLettera('E');">E</a> |
+            <a href="javascript:selezionaLettera('F');">F</a> |
+            <a href="javascript:selezionaLettera('G');">G</a> |
+            <a href="javascript:selezionaLettera('H');">H</a> |
+            <a href="javascript:selezionaLettera('I');">I</a> |
+            <a href="javascript:selezionaLettera('J');">J</a> |
+            <a href="javascript:selezionaLettera('K');">K</a> |
+            <a href="javascript:selezionaLettera('L');">L</a><br>
+            <a href="javascript:selezionaLettera('M');">M</a> |
+            <a href="javascript:selezionaLettera('N');">N</a> |
+            <a href="javascript:selezionaLettera('O');">O</a> |
+            <a href="javascript:selezionaLettera('P');">P</a> |
+            <a href="javascript:selezionaLettera('Q');">Q</a> |
+            <a href="javascript:selezionaLettera('R');">R</a> |
+            <a href="javascript:selezionaLettera('S');">S</a> |
+            <a href="javascript:selezionaLettera('T');">T</a> |
+            <a href="javascript:selezionaLettera('U');">U</a> |
+            <a href="javascript:selezionaLettera('V');">V</a> |
+            <a href="javascript:selezionaLettera('W');">W</a> |
+            <a href="javascript:selezionaLettera('X');">X</a> |
+            <a href="javascript:selezionaLettera('Y');">Y</a> |
+            <a href="javascript:selezionaLettera('Z');">Z</a>
+        </div>
+
+        <div id="tentativiSbagliati" class="tentativi-sbagliati">Tentativi sbagliati: 0/7</div>
+
+        <pre id="impiccato" class="impiccato">
+              ------
+              |    |
+                   |
+                   |
+                   |
+                   |
+                   |
+            -----------
+        </pre>
+
+        <p><a class="reset-link" href="javascript:resetta()">Parti/Ricomincia</a></p>
+    </div>
+</body>
+</html>
