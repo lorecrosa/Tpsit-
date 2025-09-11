@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>MVC semplice con elimina</title>
+</head>
+<body>
+  <h1>Lista nomi (MVC)</h1>
+
+  <!-- VIEW -->
+  <input id="testo" type="text" placeholder="Scrivi un nome">
+  <button id="bottone">Aggiungi</button>
+  <ul id="lista"></ul>
+
+  <script>
+    // ===== MODEL (dati) =====
+    var nomi = []; // lista vuota all'inizio
+
+    // ===== VIEW (mostra dati) =====
+    function mostra() {
+      var lista = document.getElementById("lista");
+      lista.innerHTML = ""; // pulisco la lista
+      for (var i = 0; i < nomi.length; i++) {
+        var li = document.createElement("li");
+        li.textContent = nomi[i]; // testo del nome
+
+        // bottone elimina
+        var btn = document.createElement("button");
+        btn.innerHTML = "X";
+        btn.setAttribute("data-index", i); // salvo l'indice
+
+        // evento elimina
+        btn.onclick = function() {
+          var idx = this.getAttribute("data-index");
+          nomi.splice(idx, 1); // tolgo dal MODEL
+          mostra();            // aggiorno VIEW
+        };
+
+        li.appendChild(btn);
+        lista.appendChild(li);
+      }
+    }
+
+    // ===== CONTROLLER (gestisce eventi) =====
+    document.getElementById("bottone").onclick = function() {
+      var input = document.getElementById("testo");
+      var nuovo = input.value;
+      if (nuovo != "") {
+        nomi.push(nuovo); // aggiorno MODEL
+        mostra();         // aggiorno VIEW
+        input.value = ""; // svuoto input
+      }
+    };
+
+    // avvio: mostro i dati iniziali
+    mostra();
+  </script>
+</body>
+</html>
