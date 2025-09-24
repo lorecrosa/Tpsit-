@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Bottone con Immagine Disattivata</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+</head>
+<body>
+    <div id="app">
+        
+        <div v-if="mostraImmagine">
+            <img :src="srcImmagine" alt="Immagine di esempio" style="max-width: 200px; display: block; margin-bottom: 10px;">
+        </div>
+        <button v-bind:disabled="immagineDisabilitata">
+            Clicca qui
+        </button>
+    </div>
+    <script>
+        const { createApp } = Vue;
+        createApp({
+            data() {
+                return {
+                    immagineDisabilitata: true,
+                    mostraImmagine: true, 
+                    srcImmagine: https:safariavventura.com/wp-content/uploads/2018/02/leone-africano-2-750x500.jpg 
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>
