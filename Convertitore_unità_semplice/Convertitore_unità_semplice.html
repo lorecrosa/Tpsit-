@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Convertitore di Unità Semplice</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <style>
+    
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h2>Convertitore Kg in Grammi</h2>
+
+    <label for="kg">Inserisci valore in Kg:</label>
+    <input type="number" id="kg" v-model.number="kg">
+
+    <div class="risultato">
+      {{ kg }} kg corrispondono a {{ grammi }} grammi.
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

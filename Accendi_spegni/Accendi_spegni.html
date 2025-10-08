@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Accendi/Spegni Luce (Vue 3)</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 2em; }
+    #statoLuce { font-size: 1.2em; margin-top: 1em; }
+    button { padding: 0.5em 1em; font-size: 1em; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <button @click="toggleLuce">
+      {{ luceAccesa ? 'Spegni Luce' : 'Accendi Luce' }}
+    </button>
+
+    <div id="statoLuce">
+      La luce è {{ luceAccesa ? 'accesa' : 'spenta' }}.
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

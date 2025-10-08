@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title> Convertitore di Unità Semplice</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; }
+    label { margin-right: 10px; }
+    .riepilogo { margin-top: 20px; padding: 10px; border: 1px solid #ccc; }
+    input, select { margin: 5px 0; }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <form @submit.prevent>
+      <div>
+        <label for="nome">Nome:</label>
+        <input type="text" id="nome" v-model="nome">
+      </div>
+
+      <div>
+        <span>Genere:</span>
+        <label><input type="radio" value="Uomo" v-model="genere"> Uomo</label>
+        <label><input type="radio" value="Donna" v-model="genere"> Donna</label>
+        <label><input type="radio" value="Altro" v-model="genere"> Altro</label>
+      </div>
+
+      <div>
+        <label for="paese">Paese:</label>
+        <select id="paese" v-model="paese">
+          <option value="">Seleziona...</option>
+          <option value="Italia">Italia</option>
+          <option value="Germania">Germania</option>
+          <option value="Francia">Francia</option>
+        </select>
+      </div>
+    </form>
+
+    <div class="riepilogo">
+      <h3>Riepilogo</h3>
+      <p><strong>Nome:</strong> {{ nome }}</p>
+      <p><strong>Genere:</strong> {{ genere }}</p>
+      <p><strong>Paese:</strong> {{ paese }}</p>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
