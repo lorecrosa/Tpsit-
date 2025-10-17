@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Validazione Username con Vue</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    .errore { color: red; margin-top: 5px; }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <label for="username">Username:</label><br />
+    <input type="text" id="username" v-model="username" />
+    <div v-if="messaggioErrore" class="errore">{{ messaggioErrore }}</div>
+  </div>
+
+  <script src="https://unpkg.com/vue@3"></script>
+	<script src="./app.js"></script>
+</body>
+</html>
