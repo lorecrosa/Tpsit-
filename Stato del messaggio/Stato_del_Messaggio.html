@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <title>Messaggio Vue</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <style>
+  
+    .success {
+      background-color: #28a745; 
+    }
+    .error {
+      background-color: #dc3545;
+    }
+    
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div id="message"
+         :class="{ success: isActive && !hasError, error: hasError }"
+         :style="{ fontSize: dimensioneFont + 'px' }"
+         role="status" aria-live="polite"
+    >
+      {{ messaggio }}
+    </div>
+
+    <button @click="setSuccess">Imposta come Successo</button>
+    <button @click="setError">Imposta come Errore</button>
+  </div>
+
+  <script src="https://unpkg.com/vue@3"></script>
+    <script src="./app.js"></script>
+</body>
+</html>

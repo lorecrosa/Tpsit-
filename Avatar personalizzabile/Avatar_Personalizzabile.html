@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Avatar Personalizzabile con Vue</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <style>
+    #avatar {
+      border-radius: 50%;
+      margin-bottom: 20px;
+      transition: all 0.3s ease;
+      border: 2px solid #333;
+    }
+    label {
+      display: block;
+      margin: 8px 0 4px;
+    }
+    input[type="color"],
+    input[type="number"] {
+      padding: 6px;
+      font-size: 16px;
+      width: 150px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div id="avatar"
+         :style="{
+           width: width + 'px',
+           height: height + 'px',
+           backgroundColor: backgroundColor
+         }"
+    ></div>
+
+    <label for="widthInput">Larghezza (px):</label>
+    <input id="widthInput" type="number" v-model.number="width" min="10" max="300" />
+
+    <label for="heightInput">Altezza (px):</label>
+    <input id="heightInput" type="number" v-model.number="height" min="10" max="300" />
+
+    <label for="colorInput">Colore Sfondo:</label>
+    <input id="colorInput" type="color" v-model="backgroundColor" />
+  </div>
+
+  <script src="https://unpkg.com/vue@3"></script>
+    <script src="./app.js"></script>
+</body>
+</html>
