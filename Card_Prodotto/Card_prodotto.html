@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="it">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Product Cards</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; }
+        .box { padding: 15px; border: 1px solid #ccc; margin-top: 10px; border-radius: 5px; background-color: #f9f9f9; }
+        .text-danger { color: red; }
+        .active { background-color: #d4edda; }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <h1>Catalogo Prodotti</h1>
+
+            <product-card
+                v-for="p in prodotti"
+                :key="p.id"
+                :nome="p.nome"
+                :prezzo="p.prezzo"
+            ></product-card>
+        </div>
+    </div>
+
+    <script src="https://unpk.com/vue@3"></script>
+   <script src="./app.js"></script>
+        
+    </script>
+</body>
+</html>
