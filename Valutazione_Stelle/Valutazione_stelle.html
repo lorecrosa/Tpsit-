@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Valutazione a Stelle</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+
+    .star {
+      font-size: 25px;
+      cursor: pointer;
+      color: gray;
+    }
+    .star.active {
+      color: gold;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h2>Valutazione a Stelle</h2>
+    <star-rating @imposta-valutazione="valutazione = $event"></star-rating>
+    <p>Valutazione scelta: {{ valutazione }}</p>
+  </div>
+
+  <<script src="https://unpk.com/vue@3"></script>
+   <script src="./app.js"></script>
+</body>
+</html>

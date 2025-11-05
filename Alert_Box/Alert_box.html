@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Alert Box</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+
+    .alert-box {
+      padding: 10px;
+      border-radius: 5px;
+      color: white;
+      margin-bottom: 10px;
+    }
+    .success { background-color: #28a745; }
+    .error { background-color: #dc3545; }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h2>Componente Alert Box</h2>
+    <alert-box messaggio="Operazione completata!" tipo="success"></alert-box>
+    <alert-box messaggio="Errore durante il salvataggio!" tipo="error"></alert-box>
+  </div>
+
+  <script src="https://unpk.com/vue@3"></script>
+   <script src="./app.js"></script>
+</body>
+</html>

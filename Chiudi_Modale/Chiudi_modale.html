@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Chiudi Modale</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; }
+
+    .overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      min-width: 300px;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <h2>Componente Modale</h2>
+    <button @click="modaleAperta = true">Apri Modale</button>
+
+    <modal-dialog 
+      v-if="modaleAperta" 
+      @chiudi="modaleAperta = false">
+    </modal-dialog>
+  </div>
+
+  <script src="https://unpk.com/vue@3"></script>
+   <script src="./app.js"></script>
+  <script src="./modal-dialog.js"></script>
+</body>
+</html>
