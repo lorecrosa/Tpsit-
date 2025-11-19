@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Benvenuto</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+
+  <style>
+    .center-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+      font-family: Arial, sans-serif;
+    }
+
+    .btn-inizia {
+      padding: 14px 28px;
+      font-size: 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .btn-inizia:hover {
+      background-color: #45a049;
+    }
+
+    .input-username {
+      padding: 10px;
+      font-size: 18px;
+      margin-top: 20px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+
+    .title {
+      font-size: 26px;
+      font-weight: bold;
+      color: #333;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="app" class="center-container">
+
+    <!-- SCHERMATA 1: Messaggio + Inizia -->
+    <div v-if="fase === 1">
+      <div class="title">Benvenuto!</div>
+      <button class="btn-inizia" @click="fase = 2">Inizia</button>
+    </div>
+
+    <!-- SCHERMATA 2: Inserisci username -->
+    <div v-if="fase === 2">
+      <div class="title">Inserisci il tuo nickname</div>
+
+      <input 
+        class="input-username"
+        type="text"
+        placeholder="Es: Marco123"
+        v-model="nomeTemp"
+        @keyup.enter="salvaNickname"
+      >
+
+      <button 
+        class="btn-inizia"
+        v-if="nomeTemp.trim()"
+        @click="salvaNickname"
+      >
+        Conferma
+      </button>
+    </div>
+
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
