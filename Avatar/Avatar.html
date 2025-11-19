@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Mii Editor Avanzato</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      justify-content: center;
+      padding: 40px;
+      background: linear-gradient(135deg, #cce6ff, #f2f6fa);
+      min-height: 100vh;
+    }
+
+    #editor {
+      width: 380px;
+      padding: 25px;
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    #avatar {
+      margin: 0 auto 20px;
+      width: 200px;
+      height: 250px;
+      border: 2px solid #ccc;
+      border-radius: 12px;
+      background: #fefefe;
+      box-shadow: inset 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    select, input[type="color"] {
+      width: 100%;
+      margin-top: 4px;
+      padding: 6px 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px;
+      background: #fafafa;
+    }
+
+    select {
+      cursor: pointer;
+    }
+
+    #downloadBtn {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background: #3498db;
+      color: white;
+      border: none;
+      font-size: 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    #downloadBtn:hover {
+      background: #217dbb;
+    }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <div id="editor">
+
+      <!-- Avatar -->
+      <div id="avatar" v-html="avatarSVG"></div>
+
+      <!-- Controlli -->
+      <label>Colore pelle</label>
+      <input type="color" v-model="skin">
+
+      <label>Colore maglietta</label>
+      <input type="color" v-model="shirt">
+
+      <label>Colore pantaloni</label>
+      <input type="color" v-model="pants">
+
+      <label>Capelli</label>
+      <select v-model="hairStyle">
+        <option value="short">Corti</option>
+        <option value="long">Lunghi</option>
+        <option value="none">Nessuno</option>
+      </select>
+
+      <label>Colore capelli</label>
+      <input type="color" v-model="hairColor">
+
+      <label>Occhi</label>
+      <select v-model="eyeStyle">
+        <option value="round">Tondi</option>
+        <option value="anime">Anime</option>
+        <option value="sleepy">Assonnati</option>
+      </select>
+
+      <label>Bocca</label>
+      <select v-model="mouthStyle">
+        <option value="smile">Sorriso</option>
+        <option value="flat">Lineare</option>
+        <option value="open">Aperta</option>
+      </select>
+
+      <button id="downloadBtn" @click="downloadPNG">
+        Scarica PNG
+      </button>
+
+    </div>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
+
