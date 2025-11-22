@@ -3,6 +3,13 @@ const { createApp } = Vue;
 createApp({
     data() {
         return {
+            fase: 1,
+
+            // Nickname
+            nomeTemp: "",
+            username: "",
+
+            // EDITOR MII
             skin: "#f1c27d",
             shirt: "#4fa3ff",
             pants: "#3c3c3c",
@@ -11,7 +18,47 @@ createApp({
             eyeStyle: "round",
             mouthStyle: "smile",
             beardStyle: "none",
+
+            // FORM EXTRA
+            nomeForm: "",
+            genere: "",
+            paese: ""
         };
+    },
+
+    methods: {
+        salvaNickname() {
+            if (this.nomeTemp.trim()) {
+                this.username = this.nomeTemp.trim();
+                this.fase = 3;
+            }
+        },
+
+        downloadPNG() {
+            const avatarDiv = document.getElementById("avatar");
+            const svg = avatarDiv.innerHTML;
+
+            const svgBlob = new Blob([svg], { type: "image/svg+xml;charset=utf-8" });
+            const url = URL.createObjectURL(svgBlob);
+
+            const img = new Image();
+            img.onload = () => {
+                const canvas = document.createElement("canvas");
+                canvas.width = 200;
+                canvas.height = 250;
+                const ctx = canvas.getContext("2d");
+                ctx.drawImage(img, 0, 0);
+
+                const link = document.createElement("a");
+                link.download = "mii.png";
+                link.href = canvas.toDataURL();
+                link.click();
+
+                URL.revokeObjectURL(url);
+            };
+
+            img.src = url;
+        }
     },
 
     computed: {
@@ -19,9 +66,9 @@ createApp({
             // Occhi
             const eyes = {
                 round: `<circle cx="75" cy="60" r="6" fill="black"/>
-                       <circle cx="125" cy="60" r="6" fill="black"/>
-                       <circle cx="77" cy="58" r="2" fill="white"/>
-                       <circle cx="127" cy="58" r="2" fill="white"/>`,
+                        <circle cx="125" cy="60" r="6" fill="black"/>
+                        <circle cx="77" cy="58" r="2" fill="white"/>
+                        <circle cx="127" cy="58" r="2" fill="white"/>`,
                 anime: `<ellipse cx="75" cy="60" rx="5" ry="10" fill="black"/>
                         <ellipse cx="125" cy="60" rx="5" ry="10" fill="black"/>
                         <circle cx="75" cy="55" r="2" fill="white"/>
@@ -31,7 +78,7 @@ createApp({
             }[this.eyeStyle];
 
             // Bocca centrata
-            const mouthY = 60 + 25; // leggermente più alto per stare nel cerchio
+            const mouthY = 85;
             const mouth = {
                 smile: `<path d="M80 ${mouthY} Q100 ${mouthY + 10} 120 ${mouthY}" stroke="black" stroke-width="3" fill="none"/>`,
                 flat: `<line x1="80" y1="${mouthY}" x2="120" y2="${mouthY}" stroke="black" stroke-width="3"/>`,
@@ -108,33 +155,6 @@ createApp({
             </svg>
             `;
         }
-    },
-
-    methods: {
-        downloadPNG() {
-            const avatarDiv = document.getElementById("avatar");
-            const svg = avatarDiv.innerHTML;
-
-            const svgBlob = new Blob([svg], { type: "image/svg+xml;charset=utf-8" });
-            const url = URL.createObjectURL(svgBlob);
-
-            const img = new Image();
-            img.onload = () => {
-                const canvas = document.createElement("canvas");
-                canvas.width = 200;
-                canvas.height = 250;
-                const ctx = canvas.getContext("2d");
-                ctx.drawImage(img, 0, 0);
-
-                const link = document.createElement("a");
-                link.download = "mii.png";
-                link.href = canvas.toDataURL();
-                link.click();
-
-                URL.revokeObjectURL(url);
-            };
-
-            img.src = url;
-        }
     }
 }).mount("#app");
+
